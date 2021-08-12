@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12"
+  },
+  "name": "simulate-real-time-data-source",
+  "description": "This project create a real-time data source as a REST API. It models the stock market, where certain symbols (columns, keys, etc.) can be looked up in a database at anytime. Just like the current market price for an asset may not have changed since the last request, the data for an earlier request returned by the simulator may not change in subsequent requests. Changes to data in repeated requests are determined randomly.",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminrhansen/Simulate-Real-Time-Data-Source.git"
+  },
+  "keywords": [
+    "nodejs",
+    "real-time",
+    "data-source",
+    "rest-api"
+  ],
+  "author": "Benjamin Hansen Acre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminrhansen/Simulate-Real-Time-Data-Source/issues"
+  },
+  "homepage": "https://github.com/benjaminrhansen/Simulate-Real-Time-Data-Source#readme"
+}
