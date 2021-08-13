@@ -1,6 +1,4 @@
 # Simulate-Real-Time-Data-Source
 This project creates a real-time data source as a REST API. It models the stock market, where certain symbols (columns, keys, etc.) can be looked up in a dictionary (or JavaScript object) at any time. Just like the current market price for an asset may not have changed since the last request, the data for an earlier request returned by the simulator may not change in subsequent requests. Changes to data in repeated requests are determined randomly.
 
-This project uses a global-dictionary variable to store the symbols desired for lookup and each data point related to that symbol (the key's value). 
-
-To setup a specific process... (to be described later)
+This project uses a global-dictionary variable to store the symbols desired for lookup and each data point related to that symbol (the key's value). This server should only be trusted locally and not used to serve non-local clients. I created this for personal use to test my code, which uses maintained APIs, and therefore, with low security measures, this server should not be used for public use.
