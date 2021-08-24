@@ -32,10 +32,10 @@ const app = require('express')();
 // it will just make updating the data source easy
 const PORT = process.env.PORT || 7000;
 
-app.get("set-seed", async(req, res, next) => {
-	seed_value = parseInt(req.query.seed);
+app.get("/set-seed", async(req, res, next) => {
+	seed_value = await parseInt(req.query.seed);
 	seed = seed_value ? seed_value : seed;
-	res.json("Seed set")
+	res.json("Seed set");
 })
 
 // GET => /modify
@@ -48,31 +48,37 @@ app.get("/modify", async(req, res, next) => {
 	// if the value is numeric, then it is trimmed and parsed into a float
 	// else, a string is held as the value for the key
 	data[key] = isNumeric(value) ? parseFloat(value.trim()) : value;
-	console.log("Current state:\n", data);
+	//console.log("Current state:\n", data);
 	res.json(data[key]);
 });
 // GET => /query
 // get the value of the key in data
 app.get("/query", async(req, res, next) => {
 	const key = req.query.key;
-	// if is number
-	// EXPLAIN THIS!!!
-	// typeof returns a pretty string, not a type!
-	// use isNaN() standing for is Not a Number
-	// invert that to check if the value is a number
-	if (!isNaN(data[key])) {
-		if (randInt(0, seed) == 0) {
-			console.log("Random passed! Modify it");
-			// just simulate adding some cents
-			const cents = Math.random();
-			// do a simple rounding on Math.random() which returns a float from zero up to 1
-			// if it returned a zero, add! 
-			// else, if the float rounds to 1, subtract!
-			data[key] += Math.round(Math.random()) == 0 ? cents : -cents;
+	if (key in data) {
+		// if is number
+		// EXPLAIN THIS!!!
+		// typeof returns a pretty string, not a type!
+		// use isNaN() standing for is Not a Number
+		// invert that to check if the value is a number
+		if (!isNaN(data[key])) {
+			if (randInt(0, seed) == 0) {
+				//console.log("Random passed! Modify it");
+				// just simulate adding some cents
+				const cents = Math.random();
+				// do a simple rounding on Math.random() which returns a float from zero up to 1
+				// if it returned a zero, add! 
+				// else, if the float rounds to 1, subtract!
+				data[key] += Math.round(Math.random()) == 0 ? cents : -cents;
+			}
 		}
+		console.log("Current state:\n", data);
+		res.json(data[key]);
 	}
-	console.log("Current state:\n", data);
-	res.json(data[key]);
+	else {
+		// NA represents key was not found or an error occurred
+		res.json("NA");
+	}
 });
 
 
